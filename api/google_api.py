@@ -5,7 +5,7 @@ from google_auth_oauthlib.flow import InstalledAppFlow
 from googleapiclient.discovery import build
 
 from logic.scheduling import create_event_from_task
-from models.tasks import Task
+from models.tasks import Task, TimeInfo
 
 SCOPES = ["https://www.googleapis.com/auth/calendar"]
 
@@ -28,15 +28,24 @@ def calendar_authorization():
 creds = calendar_authorization()
 service = build("calendar", "v3", credentials=creds)
 
-def check_if_event_collision(task: Task) -> bool:
-    collision_events = service.events().list(
+def colliding_events(task) -> list[Task]:
+    colliding_tasks: list[Task] = []
+    collision_events_results = service.events().list(
         calendarId="primary",
         timeMin=task.start_time.date_time.isoformat(),
         timeMax=task.end_time.date_time.isoformat(),
         singleEvents=True,
         orderBy="startTime",
     ).execute()
-    return len(collision_events["items"]) > 0
+    collision_events = collision_events_results.get("items", [])
+    for event in collision_events:
+        new_task = Task(
+            name=event["summary"],
+            start_time=TimeInfo(event["start"]["dateTime"], event["start"]["timeZone"]),
+            end_time=TimeInfo(event["end"]["dateTime"], event["end"]["timeZone"]))
+        colliding_tasks.append(new_task)
+    return colliding_tasks
+
 
 def add_event_to_calendar(task: Task):
   event_body = create_event_from_task(task)

@@ -21,3 +21,9 @@ def create_event_from_task(task: Task) -> dict:
         }
     }
     return event
+
+def resolve_scheduling_conflict(new_task: Task, collied_tasks: list[Task]):
+    print("⚠️Error: Event collision conflict detected")
+    print(f"1️⃣ Existing events: " + ", ".join(task.name for task in collied_tasks))
+    print(f"2️⃣ New task: {new_task.name}")
+    user_decision: str = input("Which of these should be scheduled at the current time? (1️⃣or 2️⃣):")
