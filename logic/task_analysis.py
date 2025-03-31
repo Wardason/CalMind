@@ -1,10 +1,10 @@
 import json
 from datetime import datetime
 import pytz
-import utils
+from logic import utils
 from models.tasks import Task, TimeInfo
 from openai import OpenAI
-from utils import OPENAI_API_KEY
+from logic.utils import OPENAI_API_KEY
 
 def interpret_user_input(user_input: str) -> str:
     tz = pytz.timezone("Europe/Berlin")

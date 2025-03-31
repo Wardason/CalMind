@@ -1,4 +1,7 @@
 .venv
-api_key.txt
 .idea
 .env
+secrets/credentials.json
+secrets/token.json
+token.json
+secrets
