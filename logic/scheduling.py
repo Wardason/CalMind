@@ -1,32 +1,10 @@
+from api.google_api import add_event_to_calendar, delete_event_from_calendar
 from models.tasks import Task
 
-def create_event_from_task(task: Task) -> dict:
-    event = {
-        "summary": task.name,
-        "description": task.description,
-        "start": {
-            "dateTime": task.start_time.date_time.isoformat(),
-            "timeZone": task.start_time.time_zone,
-        },
-        "end": {
-            "dateTime": task.end_time.date_time.isoformat(),
-            "timeZone": task.end_time.time_zone,
-        },
-        #"attendees": [{"email": email} for email in task.attendees],
-        "reminders": {
-            "useDefault": False,
-            "overrides": [
-                {"method": "popup", "minutes": 10}
-            ],
-        }
-    }
-    return event
-
-
 def handle_reschedule_choice(tasks: list[Task]):
-    for task in tasks:
-        print("ima reseduling the " + task.name)
-
+    print(f"Rescheduling for: " + ", ".join(task.name for task in tasks))
+    print("⏳ Please choose: enter a new time or let the assistant find one.")
+    choice = input("👉 Type 'manual' or 'assistant': ").strip().lower()
 
 def resolve_scheduling_conflict(new_task: Task, collied_tasks: list[Task]):
     print("⚠️Error: Event collision conflict detected")
@@ -39,6 +17,9 @@ def resolve_scheduling_conflict(new_task: Task, collied_tasks: list[Task]):
         if user_decision == "1":
             handle_reschedule_choice([new_task])
         elif user_decision == "2":
+            add_event_to_calendar(new_task)
+            for task in collied_tasks:
+                delete_event_from_calendar(task)
             handle_reschedule_choice(collied_tasks)
         else:
             print("❌ Please enter a valid choice (1 or 2).")

@@ -6,7 +6,6 @@ from google.oauth2.credentials import Credentials
 from google_auth_oauthlib.flow import InstalledAppFlow
 from googleapiclient.discovery import build
 
-from logic.scheduling import create_event_from_task
 from models.tasks import Task, TimeInfo
 
 SCOPES = ["https://www.googleapis.com/auth/calendar"]
@@ -48,6 +47,7 @@ def colliding_events(task) -> list[Task]:
     for event in collision_events:
         new_task = Task(
             name=event["summary"],
+            calendar_event_id=event["id"],
             start_time=TimeInfo(event["start"]["dateTime"], event["start"]["timeZone"]),
             end_time=TimeInfo(event["end"]["dateTime"], event["end"]["timeZone"]))
         colliding_tasks.append(new_task)
@@ -65,6 +65,32 @@ def formatting_timezone(end, start):
 def add_event_to_calendar(task: Task):
   event_body = create_event_from_task(task)
   event = service.events().insert(calendarId="primary", body=event_body).execute()
+  task.calendar_event_id = event.get("id")
   print("✅ Event erstellt:", event.get("htmlLink"))
 
+def delete_event_from_calendar(task: Task):
+    event = service.events().delete(calendarId='primary', eventId=task.calendar_event_id).execute()
 
+    print(f"🗑️ Event deleted: {task.name}")
+
+def create_event_from_task(task: Task) -> dict:
+    event = {
+        "summary": task.name,
+        "description": task.description,
+        "start": {
+            "dateTime": task.start_time.date_time.isoformat(),
+            "timeZone": task.start_time.time_zone,
+        },
+        "end": {
+            "dateTime": task.end_time.date_time.isoformat(),
+            "timeZone": task.end_time.time_zone,
+        },
+        #"attendees": [{"email": email} for email in task.attendees],
+        "reminders": {
+            "useDefault": False,
+            "overrides": [
+                {"method": "popup", "minutes": 10}
+            ],
+        }
+    }
+    return event
