@@ -69,9 +69,7 @@ def add_event_to_calendar(task: Task):
   print("✅ Event erstellt:", event.get("htmlLink"))
 
 def delete_event_from_calendar(task: Task):
-    event = service.events().delete(calendarId='primary', eventId=task.calendar_event_id).execute()
-
-    print(f"🗑️ Event deleted: {task.name}")
+    service.events().delete(calendarId='primary', eventId=task.calendar_event_id).execute()
 
 def create_event_from_task(task: Task) -> dict:
     event = {
