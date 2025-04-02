@@ -6,3 +6,6 @@ secrets/credentials.json
 secrets/token.json
 token.json
 secrets
+api/__pycache__/
+models/__pycache__/
+logic/__pycache__/
