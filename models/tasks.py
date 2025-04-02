@@ -11,8 +11,9 @@ class TimeInfo:
 @dataclass
 class Task:
     name: str
-    start_time: TimeInfo
-    end_time: TimeInfo
+    start_time: Optional[TimeInfo] = None
+    end_time: Optional[TimeInfo] = None
+    duration: Optional[int] = None
     calendar_event_id: Optional[str] = None
     priority: Optional[int] = None
     description: Optional[str] = None

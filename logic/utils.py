@@ -32,6 +32,7 @@ Deine Aufgabe ist es, aus diesem Text alle relevanten Informationen zu extrahier
 - **Startzeit**: ... (ISO-Format)
 - **Endzeit**: ... (ISO-Format)
 - **Zeitzone**: ...
+- **Dauer der Aufgabe**: ...
 - **Priorität**: ... (z. B. 1–3 oder leer)
 - **Beschreibung**: ...
 - **Teilnehmer**: name1@example.com, name2@example.com
@@ -70,6 +71,7 @@ structured_output_instructions_prompt: dict = {
                                     "required": ["date_time", "time_zone"],
                                     "additionalProperties": False
                                 },
+                                "duration": {"type": "integer"},
                                 "priority": {"type": "integer"},
                                 "description": {"type": "string"},
                                 "attendees": {
@@ -81,6 +83,7 @@ structured_output_instructions_prompt: dict = {
                                 "name",
                                 "start_time",
                                 "end_time",
+                                "duration",
                                 "priority",
                                 "description",
                                 "attendees"
