@@ -8,7 +8,6 @@ structured_output: dict = structured_output_from_user_input(interpret_user_input
 tasks = tasks_from_structured_output(structured_output)
 for task in tasks:
     if len(colliding_events(task)) > 0:
-        colliding_events = colliding_events(task)
-        resolve_scheduling_conflict(task, colliding_events)
+        resolve_scheduling_conflict(task, colliding_events(task))
     else:
         add_event_to_calendar(task)

@@ -1,6 +1,6 @@
 from dotenv import load_dotenv
 import os
-from openai.types.responses import ResponseTextConfigParam#
+from openai.types.responses import ResponseTextConfigParam
 
 
 load_dotenv()

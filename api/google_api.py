@@ -1,4 +1,6 @@
 import os.path
+from datetime import timezone
+
 from google.auth.transport.requests import Request
 from google.oauth2.credentials import Credentials
 from google_auth_oauthlib.flow import InstalledAppFlow
@@ -30,10 +32,15 @@ service = build("calendar", "v3", credentials=creds)
 
 def colliding_events(task) -> list[Task]:
     colliding_tasks: list[Task] = []
+    start = task.start_time.date_time
+    end = task.end_time.date_time
+
+    end, start = formatting_timezone(end, start)
+
     collision_events_results = service.events().list(
         calendarId="primary",
-        timeMin=task.start_time.date_time.isoformat(),
-        timeMax=task.end_time.date_time.isoformat(),
+        timeMin=start.isoformat(),
+        timeMax=end.isoformat(),
         singleEvents=True,
         orderBy="startTime",
     ).execute()
@@ -45,6 +52,14 @@ def colliding_events(task) -> list[Task]:
             end_time=TimeInfo(event["end"]["dateTime"], event["end"]["timeZone"]))
         colliding_tasks.append(new_task)
     return colliding_tasks
+
+
+def formatting_timezone(end, start):
+    if start.tzinfo is None:
+        start = start.replace(tzinfo=timezone.utc)
+    if end.tzinfo is None:
+        end = end.replace(tzinfo=timezone.utc)
+    return end, start
 
 
 def add_event_to_calendar(task: Task):

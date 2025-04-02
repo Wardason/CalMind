@@ -1,4 +1,5 @@
 .venv
+.venv1
 .idea
 .env
 secrets/credentials.json
