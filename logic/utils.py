@@ -98,3 +98,41 @@ structured_output_instructions_prompt: dict = {
             "strict": True
         }
     }
+
+smart_assistant_prompt  = """
+Du bist ein intelligenter Planungsassistent. Ich werde dir gleich:
+- eine Liste an Aufgaben übergeben,
+- die bereits belegten Zeitfenster meines Kalenders (im ISO-Format),
+- sowie meine persönlichen Planungsregeln.
+
+Bitte plane jede Aufgabe sinnvoll in meinem Kalender ein. Niemals darf die übergebne Aufgabe einen schon 
+gebuchten Zeitslot überschneiden, dann suche lieber nach einem neuen freien Slot auch wenn dieser in weiter 
+Zukunft liegt.
+---
+
+📋 **Aufgaben:**  
+🗓️ **Belegte Zeitfenster (nicht verfügbar):**  
+📌 **Planungsregeln:**  
+---
+
+🎯 **Deine Aufgabe für jede Task:**
+1. **Dauer abschätzen**, falls keine genannt ist.
+2. **Kategorie zuordnen**: entweder `work`, `social` oder `health`.
+3. **Einen passenden freien Termin finden**, der:
+   - sich **nicht mit belegten Slots überschneidet**
+   - **meine Planungsregeln** berücksichtigt
+4. **Antwort im folgenden Format zurückgeben (eine Zeile pro Aufgabe):**
+<Emoji> <Category>: <Task text> on <YYYY-MM-DD>THH:MM for <Dauer in Minuten> minutes.
+"""
+
+user_rules = """
+    Bitte keine Arbeitstermine vor 8 Uhr morgens und nach 18 Uhr abends.
+    Ich mache zwischen 12 und 13 Uhr Mittagspause – dort keine Aufgaben einplanen.
+    Sonntags möchte ich komplett frei haben.
+    Zwischen zwei Aufgaben sollte mindestens 30 Minuten Pause sein.
+    Wenn möglich, plane Fokus-Aufgaben am liebsten vormittags zwischen 9 und 12 Uhr oder nachmittags zwischen 14 und 16 Uhr.
+    Ich möchte nicht mehr als 5 Aufgaben pro Tag einplanen.
+    Vermeide es, Aufgaben direkt hintereinander zu legen – etwas Abstand ist mir wichtig.
+    Ich fange ungern vor 8:30 Uhr mit konzentrierten Aufgaben an.
+    Spätestens um 17:30 Uhr möchte ich mit allem durch sein.
+    """

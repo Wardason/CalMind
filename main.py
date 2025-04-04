@@ -1,4 +1,5 @@
 from logic.scheduling import user_input_to_tasks, task_collision_validation
+from logic.smart_assistant import find_available_time_slot
 
 print("\n🧠 Welcome to CalMind – your intelligent scheduling assistant.\n")
 print("Please choose how you'd like to create your task:\n")
@@ -13,8 +14,8 @@ if mode == "1":
         task_collision_validation(task)
 elif mode == "2":
     user_input: str = input("🧠 Smart scheduling, enter the task you'd like to schedule: ")
-    for task in user_input_to_tasks(user_input):
-        print(f"{task.name} + {task.duration}")
+    for task in user_input_to_tasks(find_available_time_slot(user_input)):
+        task_collision_validation(task)
 else:
     print("❌ Invalid input. Please restart the program and choose 1 or 2.")
 

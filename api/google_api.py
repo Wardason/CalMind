@@ -1,5 +1,5 @@
 import os.path
-from datetime import timezone
+from datetime import timezone, datetime, timedelta
 
 from google.auth.transport.requests import Request
 from google.oauth2.credentials import Credentials
@@ -53,14 +53,12 @@ def colliding_events(task) -> list[Task]:
         colliding_tasks.append(new_task)
     return colliding_tasks
 
-
 def formatting_timezone(end, start):
     if start.tzinfo is None:
         start = start.replace(tzinfo=timezone.utc)
     if end.tzinfo is None:
         end = end.replace(tzinfo=timezone.utc)
     return end, start
-
 
 def add_event_to_calendar(task: Task):
   event_body = create_event_from_task(task)
@@ -70,6 +68,18 @@ def add_event_to_calendar(task: Task):
 
 def delete_event_from_calendar(task: Task):
     service.events().delete(calendarId='primary', eventId=task.calendar_event_id).execute()
+
+def get_all_events_from_current_week():
+    now = datetime.now(tz=timezone.utc)
+    one_week_later = now + timedelta(days=7)
+    event_results = service.events().list(
+        calendarId="primary",
+        timeMin=now.isoformat(),
+        timeMax=one_week_later.isoformat(),
+        singleEvents=True,
+        orderBy="startTime",
+    ).execute()
+    return event_results.get("items", [])
 
 def create_event_from_task(task: Task) -> dict:
     event = {
