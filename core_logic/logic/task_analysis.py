@@ -2,9 +2,9 @@ import json
 from datetime import datetime
 import pytz
 
-from api.openai_api import gpt_generate_response_request, gpt_structured_response_request
-from logic.utils import structured_output_instructions_prompt, interpret_prompt
-from models.tasks import Task, TimeInfo
+from core_logic.api.openai_api import gpt_generate_response_request, gpt_structured_response_request
+from core_logic.logic.utils import structured_output_instructions_prompt, interpret_prompt
+from core_logic.models.tasks import Task, TimeInfo
 
 def interpret_user_input(user_input: str) -> str:
     tz = pytz.timezone("Europe/Berlin")

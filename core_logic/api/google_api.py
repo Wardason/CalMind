@@ -6,7 +6,7 @@ from google.oauth2.credentials import Credentials
 from google_auth_oauthlib.flow import InstalledAppFlow
 from googleapiclient.discovery import build
 
-from models.tasks import Task, TimeInfo
+from core_logic.models.tasks import Task, TimeInfo
 
 SCOPES = ["https://www.googleapis.com/auth/calendar"]
 

@@ -1,6 +1,6 @@
-from api.google_api import add_event_to_calendar, delete_event_from_calendar, colliding_events
-from logic.task_analysis import interpret_user_input, structured_output_from_user_input, tasks_from_structured_output
-from models.tasks import Task
+from core_logic.api.google_api import add_event_to_calendar, delete_event_from_calendar, colliding_events
+from core_logic.logic.task_analysis import interpret_user_input, structured_output_from_user_input, tasks_from_structured_output
+from core_logic.models.tasks import Task
 
 
 def reschedule_assistant():

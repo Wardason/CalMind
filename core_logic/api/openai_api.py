@@ -1,6 +1,6 @@
 from openai import OpenAI
 
-from logic.utils import OPENAI_API_KEY
+from core_logic.logic.utils import OPENAI_API_KEY
 
 client = OpenAI(api_key=OPENAI_API_KEY)
 
