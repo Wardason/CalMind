@@ -4,20 +4,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CalMind</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
+    <div class="chat-container">
+        <header class="chat-header">
+            <h1>CalMind</h1>
+        </header>
 
-    <h1>CalMind</h1>
+        <div class="chat-history" id="chat-history">
+            <div class="message bot-message">
+                <p>Hallo! Ich bin CalMind. Wähle den Modus (Manual/Smart) und beschreibe deinen Terminwunsch.</p>
+            </div>
+        </div>
 
-    <p>Beschreibe deinen Terminwunsch:</p>
+        <footer class="input-area">
+             <form id="message-form" action="/process" method="post">
+                 <button type="button" id="mode-toggle-button" class="mode-button">Manual</button>
+                 <input type="hidden" id="mode-input" name="mode" value="manual">
+                 <input type="text" id="user-input" name="user_message" placeholder="Deine Anfrage..." required aria-label="Texteingabe">
+                 <button type="submit" class="submit-button" aria-label="Nachricht senden">Senden</button>
+             </form>
+        </footer>
+    </div>
 
-    <form action="/process" method="post">
-        <label for="termin_beschreibung">Deine Anfrage:</label><br>
-        <input type="text" id="termin_beschreibung" name="beschreibung" size="50" placeholder="z.B. Zahnarzttermin morgen um 14 Uhr für 1 Stunde">
-        <br><br>
-        <button type="submit">Termin finden oder eintragen</button>
-    </form>
-
-
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>
