@@ -37,7 +37,7 @@ def tasks_from_structured_output(data: dict) -> list[Task]:
                 ),
                 duration=task_dict["duration"],
                 priority=task_dict["priority"],
-                description=task_dict["description"],
+                tag=task_dict["tag"],
                 attendees=task_dict["attendees"]
             )
             task_list.append(task)

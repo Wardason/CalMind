@@ -27,7 +27,6 @@ def handle_reschedule_choice(tasks: list[Task]):
             print("❌ Please enter a valid choice (manual or assistant).")
 
 def resolve_scheduling_conflict(new_task: Task, collied_tasks: list[Task]):
-    scheduling_conflict_messages(collied_tasks, new_task)
     user_decision: str = ""
 
     while user_decision not in ["1", "2"]:
@@ -42,18 +41,17 @@ def resolve_scheduling_conflict(new_task: Task, collied_tasks: list[Task]):
         else:
             print("❌ Please enter a valid choice (1 or 2).")
 
-def scheduling_conflict_messages(collied_tasks, new_task):
-    print("⚠️Error: Event collision conflict detected")
-    print(f"1️⃣ Existing events: " + ", ".join(task.name for task in collied_tasks))
-    print(f"2️⃣ New task: {new_task.name}")
+#def scheduling_conflict_messages(collied_tasks, new_task):
+#    f"""⚠️Error: Event collision conflict detected
+#    1️⃣ Existing events:  {+ ", ".join(task.name for task in collied_tasks}
+#    2️⃣ New task: {new_task.name}"""'
 
 def task_collision_validation(input_task: Task):
-    info_message: str = ""
     if len(colliding_events(input_task)) > 0:
-        resolve_scheduling_conflict(input_task, colliding_events(input_task))
+        # resolve_scheduling_conflict(input_task, colliding_events(input_task))
+        info_message = "⚠️Error: Event collision conflict detected"
     else:
         info_message = add_event_to_calendar(input_task)
-
     return info_message
 
 def user_input_to_tasks(input_message: str) -> list[Task]:

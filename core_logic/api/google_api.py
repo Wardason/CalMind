@@ -86,7 +86,7 @@ def get_all_events_from_current_week():
 def create_event_from_task(task: Task) -> dict:
     event = {
         "summary": task.name,
-        "description": task.description,
+        "description": task.tag,
         "start": {
             "dateTime": task.start_time.date_time.isoformat(),
             "timeZone": task.start_time.time_zone,

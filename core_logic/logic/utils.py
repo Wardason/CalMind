@@ -18,12 +18,12 @@ Deine Aufgabe ist es, aus diesem Text alle relevanten Informationen zu extrahier
 2. **Verwende das heutige Datum**: {{DATETIME_NOW}}  
 3. **Verwende diese Standard-Zeitzone**, falls keine angegeben ist: {{TIMEZONE}}
 4. **Wenn kein Name für die Aufgabe/Event genannt wird**, wähle einen sinnvollen und passenden Namen.
-5. Extrahiere:
+5. ** requiered kategorisiere dieser aufgabe einen der folgenden tags hinzu: work, social, sport
+6. Extrahiere:
    - Name des Events
    - Startzeit & Endzeit
    - Zeitzone
    - Priorität (wenn nicht gegeben, dann als default wert 1)
-   - Beschreibung (optional)
    - Teilnehmer (falls Namen oder E-Mail-Adressen genannt werden)
 
 🧾 Ausgabeformat (aber noch KEIN JSON!):
@@ -34,7 +34,7 @@ Deine Aufgabe ist es, aus diesem Text alle relevanten Informationen zu extrahier
 - **Zeitzone**: ...
 - **Dauer der Aufgabe**: ...
 - **Priorität**: ... (z. B. 1–3 oder leer)
-- **Beschreibung**: ...
+- **Tag**: calmind_category:work, calmind_category:social, calmind_category:sport 
 - **Teilnehmer**: name1@example.com, name2@example.com
 
 Wenn der Benutzer mehrere Aufgaben beschreibt, gib sie als **fortlaufende Liste** mit Bulletpoints aus.
@@ -73,7 +73,7 @@ structured_output_instructions_prompt: dict = {
                                 },
                                 "duration": {"type": "integer"},
                                 "priority": {"type": "integer"},
-                                "description": {"type": "string"},
+                                "tag": {"type": "string"},
                                 "attendees": {
                                     "type": "array",
                                     "items": {"type": "string"}
@@ -85,7 +85,7 @@ structured_output_instructions_prompt: dict = {
                                 "end_time",
                                 "duration",
                                 "priority",
-                                "description",
+                                "tag",
                                 "attendees"
                             ],
                             "additionalProperties": False
