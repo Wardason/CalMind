@@ -64,7 +64,9 @@ def add_event_to_calendar(task: Task):
   event_body = create_event_from_task(task)
   event = service.events().insert(calendarId="primary", body=event_body).execute()
   task.calendar_event_id = event.get("id")
-  print("✅ Event erstellt:", event.get("htmlLink"))
+  dt_object = task.start_time.date_time
+  formatted_time = dt_object.strftime("%H:%M Uhr am %d.%m")
+  return f"✅ {task.name} erstellt, für {formatted_time}\n"
 
 def delete_event_from_calendar(task: Task):
     service.events().delete(calendarId='primary', eventId=task.calendar_event_id).execute()

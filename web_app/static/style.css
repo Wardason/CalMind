@@ -129,6 +129,35 @@ html, body {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
+.icon-button {
+    padding: 6px;
+    background: transparent;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    color: #8e8e93;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.icon-button svg {
+    display: block;
+}
+
+.icon-button:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.icon-button.active {
+    color: #FF66B3;
+}
+
+.icon-button.active:hover {
+     background-color: rgba(255, 102, 179, 0.1);
+}
+
 .input-area input[type="text"] {
     flex-grow: 1;
     background-color: #FFFFFF;

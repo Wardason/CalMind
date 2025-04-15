@@ -14,15 +14,24 @@
 
         <div class="chat-history" id="chat-history">
             <div class="message bot-message">
-                <p>Hallo! Ich bin CalMind. Wähle den Modus (Manual/Smart) und beschreibe deinen Terminwunsch.</p>
+                <p>Hallo! Ich bin CalMind. Wähle Modus/Aktion und beschreibe deinen Wunsch.</p>
             </div>
         </div>
 
         <footer class="input-area">
-             <form id="message-form" action="/process" method="post">
+             <form id="message-form" action="/process_message" method="post">
                  <button type="button" id="mode-toggle-button" class="mode-button">Manual</button>
                  <input type="hidden" id="mode-input" name="mode" value="manual">
+
                  <input type="text" id="user-input" name="user_message" placeholder="Deine Anfrage..." required aria-label="Texteingabe">
+
+                 <button type="button" id="quick-action-button" class="icon-button" aria-label="Schnellaktion umschalten">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" width="18" height="18">
+                      <path d="M11.983 2.204a1 1 0 0 0-1.562-.808L3 10.833a1 1 0 0 0 .83 1.584h3.793a1 1 0 0 1 .98.825l.177 1.063a1 1 0 0 0 1.98-.33L10.9 9.17a1 1 0 0 1 .98-.824h3.939a1 1 0 0 0 .83-1.583l-4.667-7.56Z" />
+                    </svg>
+                 </button>
+                 <input type="hidden" id="priority-input" name="priority" value="false">
+
                  <button type="submit" class="submit-button" aria-label="Nachricht senden">Senden</button>
              </form>
         </footer>

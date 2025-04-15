@@ -48,10 +48,13 @@ def scheduling_conflict_messages(collied_tasks, new_task):
     print(f"2️⃣ New task: {new_task.name}")
 
 def task_collision_validation(input_task: Task):
+    info_message: str = ""
     if len(colliding_events(input_task)) > 0:
         resolve_scheduling_conflict(input_task, colliding_events(input_task))
     else:
-        add_event_to_calendar(input_task)
+        info_message = add_event_to_calendar(input_task)
+
+    return info_message
 
 def user_input_to_tasks(input_message: str) -> list[Task]:
     interpret_input: str = interpret_user_input(input_message)
