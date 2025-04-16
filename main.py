@@ -1,6 +1,7 @@
 
 from flask import Flask, render_template, jsonify, request
 
+from core_logic.logic.analysis import analysing_week, format_timedelta_analysis_to_html
 from core_logic.logic.scheduling import user_input_to_tasks, task_collision_validation
 from core_logic.logic.smart_assistant import find_available_time_slot
 
@@ -24,6 +25,9 @@ def process_message():
     elif selected_mode == 'smart':
         for task in user_input_to_tasks(find_available_time_slot(user_message)):
             bot_response_text += task_collision_validation(task)
+    elif selected_mode == 'analysis':
+        analysis_date = analysing_week()
+        bot_response_text = format_timedelta_analysis_to_html(analysis_date)
 
     return jsonify({'response': bot_response_text})
 

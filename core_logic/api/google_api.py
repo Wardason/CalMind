@@ -71,7 +71,7 @@ def add_event_to_calendar(task: Task):
 def delete_event_from_calendar(task: Task):
     service.events().delete(calendarId='primary', eventId=task.calendar_event_id).execute()
 
-def get_all_events_from_current_week():
+def get_all_events_from_now_to_week() -> list[dict]:
     now = datetime.now(tz=timezone.utc)
     one_week_later = now + timedelta(days=7)
     event_results = service.events().list(
@@ -82,6 +82,25 @@ def get_all_events_from_current_week():
         orderBy="startTime",
     ).execute()
     return event_results.get("items", [])
+
+def get_events_from_start_of_week() -> list[dict]:
+    tz_utc = timezone.utc
+    now = datetime.now(tz=tz_utc)
+    days_since_monday = now.weekday()
+    start_of_week_day = now - timedelta(days=days_since_monday)
+    start_of_week_dt = start_of_week_day.replace(hour=0, minute=0, second=0, microsecond=0)
+    end_of_today_dt = now.replace(hour=23, minute=59, second=59, microsecond=999999)
+
+    event_results = service.events().list(
+        calendarId="primary",
+        timeMin=start_of_week_dt.isoformat(),
+        timeMax=end_of_today_dt.isoformat(),
+        singleEvents=True,
+        orderBy="startTime",
+    ).execute()
+
+    return event_results.get("items", [])
+
 
 def create_event_from_task(task: Task) -> dict:
     event = {

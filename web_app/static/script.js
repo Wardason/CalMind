@@ -14,10 +14,14 @@ document.addEventListener('DOMContentLoaded', function() {
             if (currentMode === 'manual') {
                 modeToggleButton.textContent = 'Smart';
                 modeInput.value = 'smart';
+            } else if (currentMode === 'smart') {
+                modeToggleButton.textContent = 'Analysis';
+                modeInput.value = 'analysis';
             } else {
                 modeToggleButton.textContent = 'Manual';
                 modeInput.value = 'manual';
             }
+            console.log("Neuer Modus:", modeInput.value);
             if(userInput) { userInput.focus(); }
         });
     }
@@ -35,12 +39,10 @@ document.addEventListener('DOMContentLoaded', function() {
     if(messageForm && userInput && chatHistory) {
         messageForm.addEventListener('submit', function(event) {
             event.preventDefault();
-
             const messageText = userInput.value.trim();
             const formData = new FormData(messageForm);
 
             if (messageText !== '') {
-
                 const userMessageDiv = document.createElement('div');
                 userMessageDiv.classList.add('message', 'user-message');
                 const userParagraph = document.createElement('p');
@@ -48,7 +50,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 userMessageDiv.appendChild(userParagraph);
                 chatHistory.appendChild(userMessageDiv);
                 chatHistory.scrollTop = chatHistory.scrollHeight;
-
                 userInput.value = '';
                 if(userInput) { userInput.focus(); }
 
@@ -57,9 +58,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     body: formData
                 })
                 .then(response => {
-                    if (!response.ok) {
-                        throw new Error(`HTTP error! status: ${response.status}`);
-                    }
+                    if (!response.ok) { throw new Error(`HTTP error! status: ${response.status}`); }
                     return response.json();
                 })
                 .then(data => {
@@ -67,13 +66,11 @@ document.addEventListener('DOMContentLoaded', function() {
                         const botMessageDiv = document.createElement('div');
                         botMessageDiv.classList.add('message', 'bot-message');
                         const botParagraph = document.createElement('p');
-                        botParagraph.textContent = data.response;
+                        botParagraph.innerHTML = data.response;
                         botMessageDiv.appendChild(botParagraph);
                         chatHistory.appendChild(botMessageDiv);
                         chatHistory.scrollTop = chatHistory.scrollHeight;
-                    } else {
-                         throw new Error('Invalid response format from server');
-                    }
+                    } else { throw new Error('Invalid response format from server'); }
                 })
                 .catch(error => {
                     console.error('Fetch Error:', error);
