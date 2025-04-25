@@ -174,3 +174,188 @@ html, body {
     border-color: #FF66B3;
     box-shadow: 0 0 0 2px rgba(255, 102, 179, 0.3);
 }
+
+.chat-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.header-icon-button {
+    padding: 5px;
+    color: #555;
+    background: none; /* Sicherstellen, dass es keinen Hintergrund hat */
+    border: none; /* Sicherstellen, dass es keinen Rand hat */
+    /* Erbt andere Icon-Button-Stile wie cursor, transition etc. */
+}
+.header-icon-button:hover {
+    background-color: rgba(0, 0, 0, 0.08); /* Leichter Hover */
+}
+
+
+/* Overlay Stil - position: fixed ist der Schlüssel! */
+.overlay {
+    visibility: hidden; /* Statt display: none */
+    opacity: 0;         /* Unsichtbar machen */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 100;
+    transition: opacity 0.3s ease; /* Sanfter Übergang */
+}
+
+/* Modal Fenster Stil - position: fixed ist der Schlüssel! */
+.modal {
+    visibility: hidden; /* Statt display: none */
+    opacity: 0;         /* Unsichtbar machen */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #FFFFFF;
+    padding: 25px 30px;
+    border-radius: 8px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+    z-index: 101;
+    min-width: 300px;
+    max-width: 600px;
+    width: 70%;
+    transition: opacity 0.3s ease; /* Sanfter Übergang */
+}
+
+.modal h2 { margin-top: 0; margin-bottom: 20px; text-align: center; font-weight: 700; color: #333; }
+.modal-content { margin-top: 15px; }
+
+.close-button {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    background: none;
+    border: none;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #888;
+    cursor: pointer;
+    line-height: 1;
+    padding: 0;
+}
+.close-button:hover { color: #333; }
+
+/* Aktiv-Zustand für Sichtbarkeit */
+.overlay.visible,
+.modal.visible {
+    visibility: visible; /* Sichtbar machen */
+    opacity: 1;         /* Voll deckend machen */
+}
+
+.modal-content {
+    margin-top: 15px;
+    /* Optional: Zusätzliches Padding für den gesamten Inhalt */
+    /* padding: 10px 0; */
+}
+
+.modal-section-title { /* Für h3 */
+    font-size: 1.1em;
+    font-weight: 700; /* Inter Bold */
+    color: #444;
+    margin-top: 20px; /* Abstand zur vorherigen Sektion/Titel */
+    margin-bottom: 10px;
+    border-bottom: 1px solid #eee; /* Leichte Unterstreichung */
+    padding-bottom: 5px;
+}
+.modal-content h3:first-of-type {
+    margin-top: 0; /* Kein extra Abstand über der ersten Überschrift */
+}
+
+
+.rule-setting p,
+.tag-setting p {
+    color: #333;
+    line-height: 1.8; /* Etwas mehr Zeilenabstand für Lesbarkeit mit Selects */
+    margin-bottom: 10px;
+}
+
+.time-select { /* Styling für die <select> Dropdowns */
+    font-family: 'Inter', sans-serif; /* Gleiche Schriftart */
+    font-size: 0.95em;
+    padding: 4px 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+    margin: 0 5px; /* Kleiner Abstand links/rechts */
+    cursor: pointer;
+    /* Stellt sicher, dass es vertikal halbwegs zum Text passt */
+    vertical-align: middle;
+}
+.time-select:focus {
+    outline: none;
+    border-color: #FF66B3; /* Akzentfarbe */
+    box-shadow: 0 0 0 2px rgba(255, 102, 179, 0.3);
+}
+
+.modal-divider { /* Styling für die <hr> Trennlinie */
+    border: none; /* Standard-Rand entfernen */
+    border-top: 1px solid #e0e0e0; /* Eigene Linie definieren */
+    margin: 25px 0; /* Vertikaler Abstand */
+}
+
+.tag-rate-entry {
+    display: flex;              /* Label und Input nebeneinander */
+    justify-content: space-between; /* Maximaler Abstand dazwischen */
+    align-items: center;        /* Vertikal zentrieren */
+    margin-bottom: 12px;        /* Abstand zwischen den Einträgen */
+    padding: 5px 0;             /* Optional: leichter vertikaler Innenabstand */
+}
+
+.tag-rate-entry label {
+    color: #333;                /* Textfarbe für das Label */
+    margin-right: 15px;         /* Sicherstellen, dass etwas Platz zum Input ist */
+    flex-shrink: 0;             /* Verhindert, dass das Label schrumpft */
+}
+
+.hourly-rate-input { /* Styling für die Stundensatz-Inputs */
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95em;
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 100px;               /* Feste Breite für die Input-Felder */
+    text-align: right;          /* Zahlen rechtsbündig */
+}
+/* Verhindert die Standard-Pfeile bei type="number" in manchen Browsern (optional) */
+.hourly-rate-input::-webkit-outer-spin-button,
+.hourly-rate-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.hourly-rate-input[type=number] {
+  -moz-appearance: textfield; /* Firefox */
+}
+
+.hourly-rate-input:focus {
+    outline: none;
+    border-color: #FF66B3; /* Akzentfarbe */
+    box-shadow: 0 0 0 2px rgba(255, 102, 179, 0.3);
+}
+
+.preference-select { /* Styling für die Präferenz-Dropdowns */
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95em;
+    padding: 4px 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+    margin: 0 5px; /* Kleiner Abstand links/rechts */
+    cursor: pointer;
+    vertical-align: middle; /* Passt vertikale Ausrichtung an Text an */
+    /* Optional: Breite anpassen, falls nötig */
+    /* width: 150px; */
+}
+.preference-select:focus {
+    outline: none;
+    border-color: #FF66B3; /* Akzentfarbe */
+    box-shadow: 0 0 0 2px rgba(255, 102, 179, 0.3);
+}

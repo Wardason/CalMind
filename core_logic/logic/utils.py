@@ -4,7 +4,6 @@ import os
 load_dotenv()
 OPENAI_API_KEY = os.getenv("OPEN_AI_APY_KEY")
 
-
 interpret_prompt: str = """Du bist ein intelligenter Planungsassistent. Der Benutzer gibt dir natürliche Sprache ein, z. B.:
 - "Ich treffe mich morgen um 18 Uhr mit Ben."
 - "Ich muss nächste Woche eine Präsentation vorbereiten."
@@ -127,12 +126,6 @@ Zukunft liegt.
 
 user_rules = """
     Bitte keine Arbeitstermine vor 8 Uhr morgens und nach 18 Uhr abends.
-    Ich mache zwischen 12 und 13 Uhr Mittagspause – dort keine Aufgaben einplanen.
-    Sonntags möchte ich komplett frei haben.
-    Zwischen zwei Aufgaben sollte mindestens 30 Minuten Pause sein.
     Wenn möglich, plane Fokus-Aufgaben am liebsten vormittags zwischen 9 und 12 Uhr oder nachmittags zwischen 14 und 16 Uhr.
-    Ich möchte nicht mehr als 5 Aufgaben pro Tag einplanen.
-    Vermeide es, Aufgaben direkt hintereinander zu legen – etwas Abstand ist mir wichtig.
     Ich fange ungern vor 8:30 Uhr mit konzentrierten Aufgaben an.
-    Spätestens um 17:30 Uhr möchte ich mit allem durch sein.
     """

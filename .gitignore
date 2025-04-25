@@ -9,3 +9,6 @@ secrets
 core_logic/api/__pycache__/
 core_logic/models/__pycache__/
 core_logic/logic/__pycache__/
+user_data
+user_data/rate.json
+user_data/rules.json

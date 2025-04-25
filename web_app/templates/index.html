@@ -9,6 +9,11 @@
 <body>
     <div class="chat-container">
         <header class="chat-header">
+            <button id="settings-button" class="icon-button header-icon-button" aria-label="Einstellungen öffnen">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" width="20" height="20">
+                    <path fill-rule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 0 1-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 0 1 .947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 0 1 2.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 0 1 2.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 0 1-.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 0 1-.947-2.287c.836-1.372-.734-2.942-2.106-2.106A1.532 1.532 0 0 1 11.49 3.17ZM10 13a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" clip-rule="evenodd" />
+                </svg>
+            </button>
             <h1>CalMind</h1>
         </header>
 
@@ -35,6 +40,124 @@
                  <button type="submit" class="submit-button" aria-label="Nachricht senden">Senden</button>
              </form>
         </footer>
+    </div>
+
+    <div id="settings-overlay" class="overlay"></div>
+    <div id="settings-modal" class="modal">
+        <button id="close-modal-button" class="close-button" aria-label="Einstellungen schließen">×</button>
+        <h2>Einstellungen</h2>
+         <div class="modal-content">
+
+            <h3 class="modal-section-title">Rules</h3>
+             <form action="/save" method="post">
+            <div class="rule-setting">
+                <p>
+                    Arbeitstermine von
+                    <select id="rule-start-time" name="start_time" class="time-select" aria-label="Gewünschte Startzeit auswählen">
+                        <option value="00:00">00:00</option>
+                        <option value="01:00">01:00</option>
+                        <option value="02:00">02:00</option>
+                        <option value="03:00">03:00</option>
+                        <option value="04:00">04:00</option>
+                        <option value="05:00">05:00</option>
+                        <option value="06:00">06:00</option>
+                        <option value="07:00">07:00</option>
+                        <option value="08:00">08:00</option>
+                        <option value="09:00" selected>09:00</option>
+                        <option value="10:00">10:00</option>
+                        <option value="11:00">11:00</option>
+                        <option value="12:00">12:00</option>
+                        <option value="13:00">13:00</option>
+                        <option value="14:00">14:00</option>
+                        <option value="15:00">15:00</option>
+                        <option value="16:00">16:00</option>
+                        <option value="17:00">17:00</option>
+                        <option value="18:00">18:00</option>
+                        <option value="19:00">19:00</option>
+                        <option value="20:00">20:00</option>
+                        <option value="21:00">21:00</option>
+                        <option value="22:00">22:00</option>
+                        <option value="23:00">23:00</option>
+                    </select>
+                    Uhr bis
+                    <select id="rule-end-time" name="end_time" class="time-select" aria-label="Gewünschte Endzeit auswählen">
+                        <option value="00:00">00:00</option>
+                        <option value="01:00">01:00</option>
+                        <option value="02:00">02:00</option>
+                        <option value="03:00">03:00</option>
+                        <option value="04:00">04:00</option>
+                        <option value="05:00">05:00</option>
+                        <option value="06:00">06:00</option>
+                        <option value="07:00">07:00</option>
+                        <option value="08:00">08:00</option>
+                        <option value="09:00">09:00</option>
+                        <option value="10:00">10:00</option>
+                        <option value="11:00">11:00</option>
+                        <option value="12:00">12:00</option>
+                        <option value="13:00">13:00</option>
+                        <option value="14:00">14:00</option>
+                        <option value="15:00">15:00</option>
+                        <option value="16:00">16:00</option>
+                        <option value="17:00" selected>17:00</option>
+                        <option value="18:00">18:00</option>
+                        <option value="19:00">19:00</option>
+                        <option value="20:00">20:00</option>
+                        <option value="21:00">21:00</option>
+                        <option value="22:00">22:00</option>
+                        <option value="23:00">23:00</option>
+                    </select>
+                    Uhr legbar.
+                </p>
+            </div>
+             <div class="rule-setting">
+                 <p>
+                    Sport präferiert am
+                    <select id="rule-sport-preference" name="sport_preference" class="preference-select" aria-label="Bevorzugte Zeit für Sport auswählen">
+                        <option value="keine" selected>Keine Präferenz</option>
+                        <option value="morgens">morgens</option>
+                        <option value="mittags">mittags</option>
+                        <option value="abends">abends</option>
+                    </select>.
+                </p>
+            </div>
+
+            <div class="rule-setting">
+                <p>
+                    Meetings präferiert am
+                    <select id="rule-meeting-preference" name="meeting_preference" class="preference-select" aria-label="Bevorzugte Zeit für Meetings auswählen">
+                        <option value="keine" selected>Keine Präferenz</option>
+                        <option value="morgens">morgens</option>
+                        <option value="mittags">mittags</option>
+                        <option value="abends">abends</option>
+                    </select>.
+                </p>
+            </div>
+
+            <hr class="modal-divider">
+
+            <h3 class="modal-section-title">Tags</h3>
+            <div class="tag-setting">
+                 <div class="tag-setting">
+                 <div class="tag-rate-entry">
+                     <label for="rate-finn">Projekt Finn:</label>
+                     <input type="number" id="rate-finn" name="rate_finn" class="hourly-rate-input" placeholder="€/Std." min="0" step="any">
+                 </div>
+                 <div class="tag-rate-entry">
+                     <label for="rate-peter">Projekt Peter:</label>
+                     <input type="number" id="rate-peter" name="rate_peter" class="hourly-rate-input" placeholder="€/Std." min="0" step="any">
+                 </div>
+                 <div class="tag-rate-entry">
+                     <label for="rate-x">Projekt X:</label>
+                     <input type="number" id="rate-x" name="rate_x" class="hourly-rate-input" placeholder="€/Std." min="0" step="any">
+                 </div>
+            </div>
+                <div style="text-align: right; margin-top: 20px;">
+                 <button type="submit" class="submit-button"> Save</button>
+            </div>
+            </div>
+                 </form>
+
+        </div>
     </div>
 
     <script src="{{ url_for('static', filename='script.js') }}"></script>

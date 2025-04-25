@@ -88,3 +88,50 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
+
+    const settingsButton = document.getElementById('settings-button');
+    const settingsModal = document.getElementById('settings-modal');
+    const closeModalButton = document.getElementById('close-modal-button');
+    const settingsOverlay = document.getElementById('settings-overlay');
+
+    function openSettingsModal() {
+        // Prüfe, ob die Elemente existieren
+        if (settingsModal && settingsOverlay) {
+            // Füge nur die 'visible' Klasse hinzu
+            settingsOverlay.classList.add('visible');
+            settingsModal.classList.add('visible');
+        } else {
+            console.error("Modal oder Overlay Element nicht gefunden!");
+        }
+    }
+
+    function closeSettingsModal() {
+        // Prüfe, ob die Elemente existieren
+        if (settingsModal && settingsOverlay) {
+            // Entferne nur die 'visible' Klasse
+            settingsOverlay.classList.remove('visible');
+            settingsModal.classList.remove('visible');
+        }
+    }
+
+    // Event Listener hinzufügen (nur wenn Elemente gefunden wurden)
+    if (settingsButton) {
+        settingsButton.addEventListener('click', openSettingsModal);
+    } else {
+        console.error("Settings Button nicht gefunden!");
+    }
+
+    if (closeModalButton) {
+        closeModalButton.addEventListener('click', closeSettingsModal);
+    }
+
+    if (settingsOverlay) {
+        settingsOverlay.addEventListener('click', closeSettingsModal);
+    }
+
+    document.addEventListener('keydown', function(event) {
+        // Prüfe, ob Modal existiert UND sichtbar ist
+        if (event.key === 'Escape' && settingsModal && settingsModal.classList.contains('visible')) {
+            closeSettingsModal();
+        }
+    });
