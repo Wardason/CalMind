@@ -5,6 +5,7 @@ from flask import Flask, render_template, jsonify, request, redirect
 
 from core_logic.logic.analysis import analysing_week, format_timedelta_analysis_to_html
 from core_logic.logic.scheduling import user_input_to_tasks, task_collision_validation
+from core_logic.logic.settings import get_user_rules, get_user_rates
 from core_logic.logic.smart_assistant import find_available_time_slot
 
 app = Flask(__name__, template_folder='web_app/templates', static_folder='web_app/static')
@@ -14,10 +15,9 @@ def index():
 
 @app.route('/save', methods=['POST'])
 def save():
-    print(request.form['start_time'])
     rules = {
-        "start_time": request.form['start_time'],
-        "end_time": request.form['end_time'],
+        "start_event_schedule_time": request.form['start_event_schedule_time'],
+        "end_event_schedule_time": request.form['end_event_schedule_time'],
         "sport_preference": request.form['sport_preference'],
         "meeting_preference": request.form['meeting_preference']
     }
@@ -33,7 +33,6 @@ def save():
 
     with open("user_data/rates.json", "w") as f2:
         json.dump(rates, f2, indent=4)
-
     return redirect('/')
 
 @app.route('/process_message', methods=['POST'])
