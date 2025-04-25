@@ -136,24 +136,26 @@
             <hr class="modal-divider">
 
             <h3 class="modal-section-title">Tags</h3>
-            <div class="tag-setting">
-                 <div class="tag-setting">
-                 <div class="tag-rate-entry">
-                     <label for="rate-finn">Projekt Finn:</label>
-                     <input type="number" id="rate-finn" name="rate_finn" class="hourly-rate-input" placeholder="€/Std." min="0" step="any">
-                 </div>
-                 <div class="tag-rate-entry">
-                     <label for="rate-peter">Projekt Peter:</label>
-                     <input type="number" id="rate-peter" name="rate_peter" class="hourly-rate-input" placeholder="€/Std." min="0" step="any">
-                 </div>
-                 <div class="tag-rate-entry">
-                     <label for="rate-x">Projekt X:</label>
-                     <input type="number" id="rate-x" name="rate_x" class="hourly-rate-input" placeholder="€/Std." min="0" step="any">
-                 </div>
-            </div>
+       <div class="tag-setting">
+    <div class="tag-rate-entry">
+        <label for="rate-finn">Projekt Finn:</label>
+        <input type="number" id="rate-finn" name="rate_finn" class="hourly-rate-input" value="{{ rates.get('rate_finn', '') }}" min="0" step="any">
+        <span>€/Std.</span>
+    </div>
+    <div class="tag-rate-entry">
+        <label for="rate-peter">Projekt Peter:</label>
+        <input type="number" id="rate-peter" name="rate_peter" class="hourly-rate-input" value="{{ rates.get('rate_peter', '') }}" min="0" step="any">
+        <span>€/Std.</span>
+    </div>
+    <div class="tag-rate-entry">
+        <label for="rate-x">Projekt X:</label>
+        <input type="number" id="rate-x" name="rate_x" class="hourly-rate-input" value="{{ rates.get('rate_x', '') }}" min="0" step="any">
+        <span>€/Std.</span>
+    </div>
+</div>
+
                 <div style="text-align: right; margin-top: 20px;">
                  <button type="submit" class="submit-button"> Save</button>
-            </div>
             </div>
                  </form>
 

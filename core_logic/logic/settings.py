@@ -8,5 +8,5 @@ def get_user_rules() -> dict:
 
 def get_user_rates() -> dict:
     if os.path.exists("user_data/rates.json"):
-        with open("user_data/rules.json", "r") as f:
+        with open("user_data/rates.json", "r") as f:
             return json.load(f)

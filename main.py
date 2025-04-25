@@ -11,7 +11,11 @@ from core_logic.logic.smart_assistant import find_available_time_slot
 app = Flask(__name__, template_folder='web_app/templates', static_folder='web_app/static')
 @app.route('/')
 def index():
-    return render_template('index.html')
+    rules = get_user_rules()
+    rates = get_user_rates()
+    print(rules)
+    print(rates)
+    return render_template('index.html', rules=rules, rates=rates)
 
 @app.route('/save', methods=['POST'])
 def save():
